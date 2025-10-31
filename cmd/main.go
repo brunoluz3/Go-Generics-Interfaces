@@ -1,7 +1,6 @@
 package main
 
 import (
-	"estoque/internal/models"
 	"estoque/internal/services"
 	"fmt"
 )
@@ -9,29 +8,59 @@ import (
 func main() {
 	fmt.Println("Sistema de estoque")
 
-	estoque := services.NewEstoque()
-	itens := []models.Item{
-		{ID: 1, Name: "Fone", Quantity: 10, Price: 100},
-		{ID: 2, Name: "Camiseta", Quantity: 2, Price: 55.99},
-		{ID: 3, Name: "Mouse", Quantity: 6, Price: 12.99},
+	// estoque := services.NewEstoque()
+	// itens := []models.Item{
+	// 	{ID: 1, Name: "Fone", Quantity: 10, Price: 100},
+	// 	{ID: 2, Name: "Camiseta", Quantity: 2, Price: 55.99},
+	// 	{ID: 3, Name: "Mouse", Quantity: 6, Price: 12.99},
+	// }
+
+	// for _, item := range itens {
+	// 	err := estoque.AddItem(item, "Bruno")
+
+	// 	if err != nil {
+	// 		fmt.Println(err)
+	// 		continue
+	// 	}
+	// }
+
+	// //fmt.Println(estoque)
+
+	// for _, item := range estoque.ListItems() {
+	// 	fmt.Printf("\nID: %d | Item: %s | Quantidade: %d | Preço: %.2f", item.ID, item.Name, item.Quantity, item.Price)
+	// }
+
+	// fmt.Println("\nValor total do estoque R$:", estoque.CalculateTotalCost())
+
+	// itemParaBuscar, err := services.FindBy(itens, func(item models.Item) bool {
+	// 	return item.Name == "Camiseta"
+	// })
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+
+	// fmt.Print("Item encontrado: ", itemParaBuscar)
+
+	alura := services.Fornecedor{
+		CNPJ:    "123456",
+		Contato: "123",
+		Cidade:  "SP",
 	}
 
-	for _, item := range itens {
-		err := estoque.AddItem(item, "Bruno")
+	fmt.Println(alura.GetInfo())
 
-		if err != nil {
-			fmt.Println(err)
-			continue
-		}
+	if alura.VerificarDispinibilidade(10, 15) {
+		fmt.Println("Possui disponibilidade")
+	} else {
+		fmt.Println("Não possui disponibilidade")
 	}
 
-	//fmt.Println(estoque)
+	// itemByName, err := services.FindByName(itens, "Camiseta")
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
 
-	for _, item := range estoque.ListItems() {
-		fmt.Printf("\nID: %d | Item: %s | Quantidade: %d | Preço: %.2f", item.ID, item.Name, item.Quantity, item.Price)
-	}
-
-	fmt.Println("\nValor total do estoque R$:", estoque.CalculateTotalCost())
+	// fmt.Print(itemByName)
 
 	//fmt.Println(estoque.ViewAuditLog())
 
